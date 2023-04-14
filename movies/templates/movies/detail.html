@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>DETAIL</h1>
+  <hr>
+  <div>
+    <h5>{{ movie.title }}</h5>
+    <p>{{ movie.description }}</p>
+  </div>
+  <a href="{% url 'movies:index' %}">BACK</a>
+  <hr>
+{% endblock  %}
