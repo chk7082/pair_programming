@@ -6,6 +6,8 @@ class Movie(models.Model):
     title = models.CharField(max_length=20)
     description = models.TextField()
 
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="like_movies")
+
     def __str__(self):
         return self.title
     
@@ -17,3 +19,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content
+    

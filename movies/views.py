@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Movie, Comment
 from .forms import MovieForm, CommentForm
-
+from django.views.decorators.http import require_POST
 
 def index(request):
     movies = Movie.objects.all()
@@ -85,5 +85,13 @@ def comments_delete(request, movie_pk, comment_pk):
     return redirect('movies:detail', movie_pk)
 
 
-def likes(request, movie_pk):
-    pass
+@require_POST
+def likes(request, pk):
+    if request.user.is_authenticated:
+        movie = Movie.objects.get(pk=pk)
+        if movie.like_users.filter(pk=request.user.pk).exists():
+            movie.like_users.remove(request.user)
+        else:
+            movie.like_users.add(request.user)
+        return redirect('movies:index')
+    return redirect('accounts:login')
