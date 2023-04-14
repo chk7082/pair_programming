@@ -5,7 +5,7 @@
   <a href="{% url 'movies:create' %}">[CREATE]</a>
   <hr>
   {% for movie in movies %}
-    <a href="{% url 'movies:detail' movie.pk %}"><p>{{ movie.title }}</p></a>
+    <p><a href="{% url 'movies:detail' movie.pk %}">{{ movie.title }}</a> - <a href="#">{{ movie.user }}</a></p>
     <hr>
   {% endfor %}
 {% endblock %}
